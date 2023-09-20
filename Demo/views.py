@@ -19,10 +19,8 @@ class DetialsList(APIView):
             return Response({'data': serializer.data}, status=status.HTTP_201_CREATED)
         return Response({'error': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
     
-@api_view(['GET'])
-def get_slots(request):
-        user = request.user
-        slots = Slots.objects.all()
-        serializer = SlotSerializer(slots, many=True)
-
-        return Response({'message':"Succes","data":serializer.data})
+class SlotsList(APIView):
+    def get(self, request, format=None):
+        snippets = Slots.objects.all()
+        serializer = SlotSerializer(snippets, many=True)
+        return Response({'data': serializer.data})
