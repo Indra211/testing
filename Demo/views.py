@@ -20,7 +20,8 @@ class DetialsList(APIView):
         return Response({'error': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
     
 @api_view(['GET'])
-def get_slots():
+def get_slots(request):
+        user = request.user
         slots = Slots.objects.all()
         serializer = SlotSerializer(slots, many=True)
 
